@@ -25,9 +25,9 @@ class CardPlayer {
 
 // // CREATE TWO NEW CardPlayers
 // const dealer; // TODO
-const dealer =  new CardPlayer('Jack')
+const dealer =  new CardPlayer('Robin')
 // const player; // TODO
-const player = new CardPlayer('Sparrow')
+const player = new CardPlayer('Jessi')
 
 // /**
 //  * Calculates the score of a Blackjack hand
@@ -139,6 +139,8 @@ const getMessage = (count, dealerCard) => {
 const showHand = (player) => {
   const displayHand = player.hand.map((card) => card.displayVal);
   console.log(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
+  const hands = `${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`
+  return hands
 }
 
 // /**
@@ -150,19 +152,22 @@ const startGame = function() {
   player.drawCard();
   dealer.drawCard();
   let playerScore = calcPoints(player.hand).total;
+  let dealerScoreof2cards = calcPoints(dealer.hand).total;
+  if(playerScore > 21){                     // to break if score after drawing 2 cards is more then 1
+    return 'Dealer wins'
+  }
+  else if(dealerScoreof2cards > 21){       // to break if score after drawing 2 cards is more then 1
+    return 'Player wins'
+  }
   showHand(player);
   while (playerScore < 21 && confirm(getMessage(playerScore, dealer.hand[0]))) {
     player.drawCard();
     playerScore = calcPoints(player.hand).total;
     showHand(player);
   }
-  // let playerhand = ''
-  // for (let card in player.hand){
-    
-  //     playerhand += card[displayVal]
-    
-  // }
-  // document.getElementById('demo').innerHTML = playerhand
+  
+ document.getElementById("demo").innerHTML = showHand(player)  // display on html player hand cards
+ 
   if (playerScore > 21) {
     return 'You went over 21 - you lose!';
   }
@@ -174,7 +179,7 @@ const startGame = function() {
     dealerScore = calcPoints(dealer.hand).total;
     showHand(dealer);
   }
-
+  document.getElementById("demo1").innerHTML = showHand(dealer)  // display on html dealer hand cards
   if (dealerScore > 21) {
     return 'Dealer went over 21 - you win!';
   }
