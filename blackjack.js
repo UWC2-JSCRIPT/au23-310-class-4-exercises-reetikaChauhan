@@ -53,19 +53,19 @@ const calcPoints = (hand) => {
                total_points += hand[i].val
             }
 
-         }
+                 }
          
-            const blackJackScore = {
-                total : total_points,
-                isSoft: () =>{
-                    hand.forEach(element => {
-                      if (element.val === 11){
-                        return true
-                    } 
-                    });
-                    return false
-                    
-                }
+        const blackJackScore = {
+            total : total_points,
+            isSoft: () => {
+                hand.forEach(element => {
+                  if (element.val === 11){
+                    return true
+                } 
+                });
+                return false
+                
+              }
 
             }
             return blackJackScore
