@@ -17,7 +17,7 @@ const foodIsCooked = function(kind, internalTemp, doneness) {
       else if ( internalTemp > 135 && doneness == 'medium'){
            return true
       }
-      else if (kind == 'beef' && internalTemp > 155 && doneness == 'well'){
+      else if (internalTemp > 155 && doneness == 'well'){
            return true
       }
       else{
